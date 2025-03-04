@@ -1,0 +1,22 @@
+name: Deploy to GCP Cloud Storage
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸시될 때 자동 배포
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Upload to Cloud Storage
+        run: |
+          gsutil -m rsync -r ./ gs://winnie-me-3/melon-simplemode-demo
