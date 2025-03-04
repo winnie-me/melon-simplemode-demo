@@ -24,4 +24,4 @@ jobs:
 
       - name: Upload to Cloud Storage
         run: |
-          gsutil -m rsync -r ./ gs://your-bucket-name
+          gsutil -m rsync -r ./ gs://winnie-me-3/melon-simplemode-demo
