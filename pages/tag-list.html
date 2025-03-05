@@ -1,571 +1,188 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
-  <title>MELON - 검색결과</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <title>MELON - 검색결과</title>
 
-  <!-- 표준 다크모드 -->
-  <link href="//sandbox-cdnimg.melon.co.kr/services/css/dark-d789a19263.css" rel="stylesheet">
-  <!-- //표준 다크모드 -->
-  <link href="//sandbox-cdnimg.melon.co.kr/services/css/search-dfa5e51380.css" rel="stylesheet">
+    <!-- 표준 다크모드 -->
+    <link href="//sandbox-cdnimg.melon.co.kr/services/css/dark-d789a19263.css" rel="stylesheet">
+    <!-- //표준 다크모드 -->
+    <link href="//sandbox-cdnimg.melon.co.kr/services/css/search-dfa5e51380.css" rel="stylesheet">
 
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 
 <body>
 
-  <!-- MELONUIT-1792 -->
-  <div id="header" class="header header_theme_sub center-ellipsis">
+<!-- MELONUIT-1792 -->
+<div id="header" class="header header_theme_sub center-ellipsis">
     <h1 class="header__title">
-      태연 (TAEYEONTAEYEON)
+        태연 (TAEYEONTAEYEON)
     </h1>
     <button class="header__btn header__btn_theme_prev" onclick="history.back();">뒤로가기</button>
     <button class="header__btn header__btn_theme_close">닫기</button>
-  </div>
-  <!-- //MELONUIT-1792 -->
+</div>
+<!-- //MELONUIT-1792 -->
 
-  <div class="fixed_body">
+<div class="fixed_body">
 
     <div class="container">
-      <div class="wrapper search_song">
-        <!-- 멜론 모바일 검색 24년 1차 개선 MELONUIT-2590 -->
-        <div class="song-list-tag swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="SEARCH_MUSIC">음악검색</button>
-            </div>
+        <div class="wrapper search_song" id="search_song">
 
-            <div class="swiper-slide on">
-              <button type="button" class="item" data-genre-code="GN0100">발라드</button>
-            </div>
 
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN0200">댄스</button>
-            </div>
 
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN0300">국내힙합</button>
-            </div>
 
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN0400">국내R&amp;B</button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN0500">인디</button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN0600">국내록</button>
-            </div>
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN0900">POP</button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN1000">해외록</button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN1200">해외힙합</button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN1300">해외R&amp;B
-              </button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN1500">OST
-              </button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN1600">클래식
-              </button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN1700">재즈
-              </button>
-            </div>
-
-            <div class="swiper-slide">
-              <button type="button" class="item" data-genre-code="GN2200">키즈
-              </button>
-            </div>
-          </div>
         </div>
-        <div class="song-list-fixed">
-
-          <div class="play-action play-action-fixed">
-            <div class="inner-play-action">
-              <button class="btn-play">
-                <span class="ico-sprite ico-common-play-01"></span>
-                <span class="txt-btn">전체</span>
-              </button>
-              <button class="btn-play">
-                <span class="ico-sprite ico-common-shuffle"></span>
-                <span class="txt-btn">셔플</span>
-              </button>
-            </div>
-          </div>
-          <div class="service_header">
-            <div class="controls">
-              <button type="button" class="sprite check hide"> <!-- 활성화시 on 클래스 추가됩니다 -->
-                <!-- <span class="ico-sprite ico-common-check-17-off"></span> --> <!-- 240321 버튼 수정 -->
-                전체선택
-              </button>
-              <!-- <button type="button" class="sprite play small gray hide">
-            전체재생
-        </button> -->
-            </div>
-          </div>
-        </div>
-        <!-- //멜론 모바일 검색 24년 1차 개선 MELONUIT-2590 -->
-        <ul class="service_list list_music webview_more">
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call YouWhat Do What Do I Call YouWhat Do 앨범이동</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite limit19 hide">19금</span>
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call YouWhat Do What Do I Call YouWhat Do</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span>
-                  (TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call YouWhat Do What Do I Call YouWhat Do 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call YouWhat Do What Do I Call YouWhat Do</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span>
-                  (TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-          <li class="list_item is_active">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call YouWhat Do What Do I Call YouWhat Do 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite limit19 hide">19금</span>
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call YouWhat Do What Do I Call YouWhat Do</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span>
-                  (TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">Sabre & Torch 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite limit19 hide">19금</span>
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">Sabre & Torch</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span>
-                  (TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)</span>
-              </div>
-            </div>
-          </li>
-          <li class="list_item is_active">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">Sabre & Torch 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite limit19 hide">19금</span>
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">Sabre & Torch</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span>
-                  (TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)(TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-          <li class="list_item is_disabled">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">Fine 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite limit19 hide">19금</span>
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="sprite free hide">무료</span>
-                  <span class="sprite hot hide">신곡</span>
-                  <span class="sprite trackzero hide">TrackZero 곡</span>
-                  <span class="sprite holdback hide">holdback</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">Fine</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-          <li class="list_item is_active">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">Fine 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite limit19 hide">19금</span>
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="sprite free hide">무료</span>
-                  <span class="sprite hot hide">신곡</span>
-                  <span class="sprite trackzero hide">TrackZero 곡</span>
-                  <span class="sprite holdback hide">holdback</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">Fine</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-          <li class="list_item">
-            <div class="thumb">
-              <div class="inner" role="button" onclick="alert('앨범이동')">
-                <span class="screen-out">What Do I Call You 수록 앨범</span>
-                <span class="img" style="background-image: url('//cdnimg.melon.co.kr/cm2/album/images/105/34/079/10534079_20201215114038_500.jpg/melon/resize/144/optimize/90');"></span>
-              </div>
-            </div>
-            <div class="content" role="button" onclick="alert('곡담기')">
-              <div class="inner">
-                <p class="title">
-                  <span class="sprite title hide">타이틀</span>
-                  <span class="inner_title ellipsis"><span class="screen-out">곡담기</span><span class="tit_origin">What Do I Call You</span></span>
-                </p>
-                <span class="name ellipsis"><span class="word_point">태연</span> (TAEYEON)</span>
-              </div>
-            </div>
-            <div class="content button">
-              <button type="button" class="sprite play small hide">재생</button>
-            </div>
-            <div class="content button more">
-              <button type="button" class="sprite more hide">더보기</button>
-            </div>
-          </li>
-
-        </ul>
-      </div>
     </div>
-  </div>
+</div>
 
-  <script src="//sandbox-cdnimg.melon.co.kr/services/js/vendor/jquery-1.11.3.js"></script>
-  <script src="//sandbox-cdnimg.melon.co.kr/services/js/vendor/swiper.6.0.4.js"></script>
-  <script src="//sandbox-cdnimg.melon.co.kr/services/js/_uiscript.js"></script>
-  <script src="//sandbox-cdnimg.melon.co.kr/services/js/search/_search.js"></script>
-  <script>
-    //Window Load
-    $(function() {
-      //in Code
-      window.taglistSwiper = new Swiper('.song-list-tag.swiper-container', {
-        freeMode: true,
-        slidesPerView: 'auto',
-        spaceBetween: 4,
-        slidesOffsetBefore: 16,
-        slidesOffsetAfter: 16,
-        on: {
-          init: function() {},
-          click: function() {
-            $(this.slides).removeClass('on');
-            $(this.clickedSlide).addClass('on');
-
-            this.slideTo(this.clickedIndex - 1);
-
-            var genreCode = $(this.clickedSlide).find('button').data('genre-code');
-            fn.getAjaxPageLoad(genreCode);
-          }
-        }
-      });
-
-      // var $fixed = $('#header').outerHeight() + $('.song-list-fixed').outerHeight();
-      // $('.fixed_body').css('padding-top', $fixed);
-      // safeArea.init({
-      //     fixed : '#header, .song-list-fixed'
-      // });
-    });
-
+<script src="//sandbox-cdnimg.melon.co.kr/services/js/vendor/jquery-1.11.3.js"></script>
+<script src="//sandbox-cdnimg.melon.co.kr/services/js/vendor/swiper.6.0.4.js"></script>
+<script src="//sandbox-cdnimg.melon.co.kr/services/js/_uiscript.js"></script>
+<script src="//sandbox-cdnimg.melon.co.kr/services/js/search/_search.js"></script>
+<script>
     //test code
     var fn = {
-      getAjaxPageLoad: getAjaxPageLoad
+        getAjaxPageLoad: getAjaxPageLoad
     };
 
     function getAjaxPageLoad(genreCode) {
-      $('.service_list').html(genreCode);
+        // $('.service_list').html(genreCode);
     }
-  </script>
+</script>
+<script type="text/babel">
+    function DataList() {
+        const [items, setItems] = React.useState([]);
+
+        React.useEffect(() => {
+            const apiUrl = "https://winnie-bigquery-api-77vot6b6va-du.a.run.app/data";
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("API 응답:", data); // 디버깅용
+                    setItems(data.data || data);  // `data.data` 내부에 배열이 있을 가능성 처리
+                })
+                .catch(error => console.error("API 요청 오류:", error));
+        }, []);
+
+        const handleClick = (song_id) => {
+            const url = `melonplayer://play?ref=XXX&cid=${song_id}&ctype=song&menuid=1234`;
+            window.location.href = url; // URL 실행
+        };
+
+        return (
+            <ul className="service_list list_music webview_more">
+                {items.map(item => {
+                    const uniqueLiId = `li-${Math.random().toString(36).substr(2, 8)}`;
+                    return (
+                        <li className="list_item" key={uniqueLiId} id={uniqueLiId}>
+                            <div className="thumb">
+                                <div className="inner" role="button" onClick={() => alert('앨범이동')}>
+                                    <span className="screen-out">What Do I Call You 수록 앨범</span>
+                                    <span
+                                        className="img"
+                                        style={{backgroundImage: `url("//cdnimg.melon.co.kr${item.img}/melon/resize/144/optimize/90")`}}
+                                    ></span>
+                                </div>
+                            </div>
+                            <div className="content" role="button" onClick={() => handleClick(item.song_id)}>
+                                <div className="inner">
+                                    <p className="title">
+                                        <span className="inner_title ellipsis"><span className="screen-out">곡담기</span>
+                                        <span className="tit_origin">{item.title}</span>
+                                    </span>
+                                    </p>
+                                    <span className="name ellipsis">{item.artist_names.join(",")}</span>
+                                </div>
+                            </div>
+                            <div className="content button">
+                                <button type="button" className="sprite play small hide">재생</button>
+                            </div>
+                            <div className="content button more">
+                                <button type="button" className="sprite more hide">더보기</button>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+        );
+    }
+
+    function TagList() {
+        const uniqueId = React.useMemo(() => `swiper-${Math.random().toString(36).substr(2, 8)}`, []);
+
+        // 랜덤 배열 셔플링 함수
+        const shuffleArray = (array) => {
+            return [...array].sort(() => Math.random() - 0.5);
+        };
+
+        // 태그 배열을 셔플링하여 상태에 저장
+        const [shuffledTags, setShuffledTags] = React.useState([]);
+
+        React.useEffect(() => {
+            const tags = ["MOOD", "CONDITION", "PLACE", "SEASON", "ENVIRONMENT"];
+            setShuffledTags(shuffleArray(tags));
+        }, []);
+
+        setTimeout(() => { // ✅ DOM이 완전히 그려진 후 Swiper 초기화
+            const swiperInstance = new Swiper(`#${uniqueId}`, {
+                freeMode: true,
+                slidesPerView: "auto",
+                spaceBetween: 4,
+                slidesOffsetBefore: 16,
+                slidesOffsetAfter: 16,
+                on: {
+                    init: function () {
+                        // this.slideTo(0);
+                    },
+                    click: function () {
+                        $(this.slides).removeClass("on");
+                        $(this.clickedSlide).addClass("on");
+                        this.slideTo(this.clickedIndex - 1);
+
+                        var genreCode = $(this.clickedSlide)
+                            .find("button")
+                            .data("genre-code");
+                        fn.getAjaxPageLoad(genreCode);
+                    },
+                },
+            });
+
+            return () => {
+                swiperInstance.destroy();
+            };
+        }, 100);
+
+        return (
+            <div id={uniqueId} className="song-list-tag swiper-container">
+                <div className="swiper-wrapper">
+                    {shuffledTags.map((tag, index) => (
+                        <div key={index} className="swiper-slide">
+                            <button type="button" className="item" data-genre-code={`TAG_${tag}`}>
+                                {tag}
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+    const tag_root = ReactDOM.createRoot(document.getElementById("search_song"));
+    tag_root.render(<div>
+        <TagList/>
+        <DataList/>
+    </div>);
+
+    // const root = ReactDOM.createRoot(document.getElementById("root"));
+    // root.render();
+</script>
 </body>
 
 </html>
