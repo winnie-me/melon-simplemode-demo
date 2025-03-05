@@ -13,5 +13,5 @@ const vuetify = createVuetify();
 // Vue 앱 생성 및 플러그인 등록
 createApp(App)
   .use(vuetify)
-  .use(router)
+  // .use(router)
   .mount('#app');
