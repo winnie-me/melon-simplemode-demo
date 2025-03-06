@@ -1,70 +1,71 @@
 <template>
-<!--  <v-app>-->
-    <v-container>
-      <h2 class="mb-4">재생목록</h2>
+  <!--  <v-app>-->
+  <v-container>
+    <h2 class="mb-4">재생목록</h2>
 
-      <!-- 📌 바깥쪽 Expansion Panels -->
-      <v-expansion-panels variant="accordion">
-        <v-expansion-panel v-for="(item, itemIndex) in result" :key="itemIndex" elevation="0" @click="playSong(item.song_info.song_id)">
-          <template v-slot:title>
-            <v-list-item >
+    <!-- 📌 바깥쪽 Expansion Panels -->
+    <v-expansion-panels variant="accordion">
+      <v-expansion-panel v-for="(item, itemIndex) in result" :key="itemIndex" elevation="0">
+        <template v-slot:title>
+          <v-list-item @click="playSong(item.song_info.song_id);clearSongs()">
+            <template v-slot:prepend>
+              <v-avatar rounded="lg" size="48">
+                <img
+                  :src="`https://cdnimg.melon.co.kr/${item.song_info.img}/melon/resize/282/quality/80/optimize`"
+                  class="avatar-img"/>
+              </v-avatar>
+            </template>
+            <v-list-item-title>{{ item.song_info.title }}</v-list-item-title>
+            <v-list-item-subtitle>{{
+                item.song_info.artist_names.join(',')
+              }}
+            </v-list-item-subtitle>
+          </v-list-item>
+        </template>
+
+        <template v-slot:text>
+          <!-- 📌 스와이프 가능한 버튼 그룹 -->
+          <v-slide-group show-arrows class="pa-2">
+            <v-slide-group-item v-for="(tagInfo, tagIndex) in item.tagList" :key="tagIndex">
+              <v-btn class="mx-1" density="compact" variant="tonal" color="green-darken-1"
+                     @click="loadSubSongList(itemIndex, tagIndex)">
+                {{ tagInfo.tagName }}
+              </v-btn>
+            </v-slide-group-item>
+          </v-slide-group>
+
+          <!-- 📌 버튼 클릭 시 변경되는 곡 리스트 -->
+          <v-list
+            v-if="targetSubSongList.length === 0">
+            곡 없음
+          </v-list>
+          <v-list
+            v-if="targetSubSongList.length > 0">
+            <v-divider></v-divider>
+            <v-list-item
+              v-for="(song, idx) in targetSubSongList"
+              :key="idx"
+              @click="playSong(song.song_id)">
               <template v-slot:prepend>
                 <v-avatar rounded="lg" size="48">
                   <img
-                    :src="`https://cdnimg.melon.co.kr/${item.song_info.img}/melon/resize/282/quality/80/optimize`"
-                    class="avatar-img"/>
+                    :src="`https://cdnimg.melon.co.kr/${song.img}/melon/resize/282/quality/80/optimize`"
+                    class="avatar-img" alt=""/>
                 </v-avatar>
               </template>
-              <v-list-item-title>{{ item.song_info.title }}</v-list-item-title>
-              <v-list-item-subtitle>{{
-                  item.song_info.artist_names.join(',')
-                }}
-              </v-list-item-subtitle>
+
+              <v-list-item-title>{{ song.title }}</v-list-item-title>
+              <v-list-item-subtitle>{{ song.artist_names.join(',') }}</v-list-item-subtitle>
             </v-list-item>
-          </template>
+          </v-list>
 
-          <template v-slot:text>
-            <!-- 📌 스와이프 가능한 버튼 그룹 -->
-            <v-slide-group show-arrows class="pa-2">
-              <v-slide-group-item v-for="(tagInfo, tagIndex) in item.tagList" :key="tagIndex">
-                <v-btn class="mx-1" density="compact" variant="tonal" color="green-darken-1" @click="loadSubSongList(itemIndex, tagIndex)">
-                  {{ tagInfo.tagName }}
-                </v-btn>
-              </v-slide-group-item>
-            </v-slide-group>
-
-            <!-- 📌 버튼 클릭 시 변경되는 곡 리스트 -->
-            <v-list
-              v-if="targetSubSongList.length === 0">
-              곡 없음
-            </v-list>
-            <v-list
-              v-if="targetSubSongList.length > 0">
-              <v-divider></v-divider>
-              <v-list-item
-                v-for="(song, idx) in targetSubSongList"
-                :key="idx"
-                @click="playSong(song.song_id)">
-                <template v-slot:prepend>
-                  <v-avatar rounded="lg" size="48">
-                    <img
-                      :src="`https://cdnimg.melon.co.kr/${song.img}/melon/resize/282/quality/80/optimize`"
-                      class="avatar-img" alt=""/>
-                  </v-avatar>
-                </template>
-
-                <v-list-item-title>{{ song.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ song.artist_names.join(',') }}</v-list-item-subtitle>
-              </v-list-item>
-            </v-list>
-
-          </template>
+        </template>
 
 
-        </v-expansion-panel>
-      </v-expansion-panels>
-    </v-container>
-<!--  </v-app>-->
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </v-container>
+  <!--  </v-app>-->
 </template>
 
 <script>
@@ -276,6 +277,9 @@ export default {
     playSong(song_id) {
       const url = `melonplayer://play?ref=XXX&cid=${song_id}&ctype=song&menuid=1234`;
       window.location.href = url; // URL 실행
+    },
+    clearSongs() {
+      this.targetSubSongList = []
     }
   },
 };
@@ -287,6 +291,7 @@ export default {
   height: 100%;
   object-fit: cover;
 }
+
 /*
 ::v-deep(.v-container) {
   width: 100%;
@@ -312,9 +317,9 @@ export default {
 }
 
 ::v-deep(.v-expansion-panel-text__wrapper) {
-    padding: 0px;
-    flex: 1 1 auto;
-    max-width: 100%;
+  padding: 0px;
+  flex: 1 1 auto;
+  max-width: 100%;
 }
 
 </style>

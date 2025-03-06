@@ -1,4 +1,4 @@
-# gcloud auth login
+#gcloud auth login
 
 gcloud builds submit --tag asia-northeast3-docker.pkg.dev/dev-ai-project-357507/winnie-docker-repo/bigquery-api
 
