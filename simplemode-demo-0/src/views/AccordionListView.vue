@@ -83,73 +83,7 @@ export default {
       currentItemIndex: -1,
       currentItemTagIndex: -1,
       targetSubSongList: [
-        {
-          "song_id": 33525187,
-          "song_id_1": 33525187,
-          "title": "십자가를 바라보며 (Live)",
-          "album_id": 10616806,
-          "album_name": "오버플로우 라이브",
-          "artist_ids": [
-            2894763
-          ],
-          "artist_names": [
-            "OVERFLOW (오버플로우)"
-          ],
-          "class": "CC0001=기독교음악",
-          "genre": [
-            "GC0042=국내CCM"
-          ],
-          "style": [],
-          "copyright": [
-            "RC0054=881788|존추",
-            "RC0055=881788|존추\f2940826|김영수",
-            "RC0057=881788|존추"
-          ],
-          "disk_no": 1,
-          "track_no": 4,
-          "play_time": 316,
-          "issue_date": "20210531",
-          "svc_info": "00100000000500010000",
-          "opened_at": "2021-05-31T12:00:00.000+0900",
-          "registered_at": "2021-06-28T00:20:08.000+0900",
-          "img": "/cm2/album/images/106/16/806/10616806_20210528161333.jpg"
-        },
-        {
-          "song_id": 4193346,
-          "song_id_1": 4193346,
-          "title": "Heart Attack",
-          "album_id": 2195303,
-          "album_name": "The 1st Album &#39;XOXO&#39; Repackage",
-          "artist_ids": [
-            724619
-          ],
-          "artist_names": [
-            "EXO"
-          ],
-          "class": "CC0006=한국대중음악",
-          "genre": [
-            "GC0011=Dance",
-            "GC0089=댄스 10‘~",
-            "GC0090=아이돌 남자",
-            "GC0093=아이돌 댄스"
-          ],
-          "style": [
-            "SC0381=10' Dance"
-          ],
-          "copyright": [
-            "RC0054=697315|Goodwill\f179702|MGI",
-            "RC0055=640031|Misfit",
-            "RC0057=697315|Goodwill\f179702|MGI"
-          ],
-          "disk_no": 1,
-          "track_no": 10,
-          "play_time": 218,
-          "issue_date": "20130805",
-          "svc_info": "00000000000500000000",
-          "opened_at": "2013-08-05T11:59:00.000+0900",
-          "registered_at": "2025-01-28T14:40:52.000+0900",
-          "img": "/cm/album/images/021/95/303/2195303.jpg"
-        },],
+      ],
       result:
         [ // item.tagList[currentItemTagIndex].subSongList
           {

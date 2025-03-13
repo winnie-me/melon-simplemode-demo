@@ -70,7 +70,6 @@ def get_bigquery_data(request: Request):
     song_docs = song_ref.stream()
 
     docs_list = list(song_docs)
-    random_docs = random.shuffle(docs_list)
 
     results = []
     for doc in docs_list:

@@ -5,3 +5,4 @@ export const useUserStore = defineStore("user", () => {
   const selectedUserId = ref('46536104');
   return { selectedUserId };
 });
+
