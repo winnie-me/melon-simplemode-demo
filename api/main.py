@@ -10,6 +10,8 @@ from contextlib import asynccontextmanager
 # API 라우터 파일 가져오기
 from feature.bigquery_api import router as bigquery_router
 from feature.firestore_api import router as firestore_router
+from feature.trending_revival import router as trending_revival_router
+from feature.collections import router as collections_router
 
 # 환경 변수에서 프로젝트 ID 가져오기
 PROJECT_ID = os.getenv("GCP_PROJECT_ID", "dev-ai-project-357507")
@@ -22,8 +24,15 @@ fs_client = None
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.bigquery_client = bigquery.Client(project=PROJECT_ID)  # ✅ `app.state`에 저장
-    app.state.fs_client = firestore.Client(database="simplemode-demo")  # ✅ Firestore도 저장
+    app.state.fs_client = firestore.Client()  # database="simplemode-demo"
     print("Clients initialized.")
+
+    # ✅ 모든 등록된 API 라우트 로그 출력
+    print("\n🔹 Registered API Endpoints:")
+    for route in app.routes:
+        if hasattr(route, "methods"):
+            methods = ", ".join(route.methods)
+            print(f"  {methods}: {route.path}")
 
     yield  # FastAPI 실행
 
@@ -46,6 +55,8 @@ app.add_middleware(
 # ✅ 분리된 API 라우터 등록
 app.include_router(bigquery_router, prefix="/bigquery", tags=["BigQuery"])
 app.include_router(firestore_router, prefix="/firestore", tags=["Firestore"])
+app.include_router(trending_revival_router, prefix="/trending-revival", tags=["chacha"])
+app.include_router(collections_router, prefix="/collections", tags=["julian"])
 
 
 @app.get("/")

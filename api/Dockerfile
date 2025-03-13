@@ -13,4 +13,4 @@ COPY . .
 
 # FastAPI 실행 (Gunicorn 사용)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
-# uvicorn main:app
+# uvicorn main:app --reload

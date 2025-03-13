@@ -1,7 +1,7 @@
 <template>
   <!--  <v-app>-->
-  <v-container>
-    <h2 class="mb-4">재생목록</h2>
+  <v-container :style="{ width: mainWidth }" >
+    <!--    <h2 class="mb-4">재생목록</h2>-->
 
     <!-- 📌 바깥쪽 Expansion Panels -->
     <v-expansion-panels variant="accordion">
@@ -72,6 +72,12 @@
 import {nextTick} from "vue";
 
 export default {
+  props: {
+/*    elevation: {
+      type: Number,   // 숫자 타입으로 설정
+      default: 0      // 기본값 0
+    }*/
+  },
   data() {
     return {
       currentItemIndex: -1,
@@ -234,7 +240,15 @@ export default {
     }
       ;
   },
-
+  computed: {
+    // 📌 화면 크기에 따라 메인 컨텐츠 width 조정
+    mainWidth() {
+      if (this.$vuetify.display.xl) return "40vw"; // 큰 화면에서
+      if (this.$vuetify.display.lg) return "40vw"; // 일반 화면에서
+      if (this.$vuetify.display.md) return "90vw"; // 태블릿에서 90%
+      return "95vw"; // 모바일에서 거의 풀스크린
+    }
+  },
   methods: {
     async loadSubSongList(itemIndex, tagIndex) {
       try {
@@ -292,8 +306,7 @@ export default {
   object-fit: cover;
 }
 
-/*
-::v-deep(.v-container) {
+/*::v-deep(.v-container) {
   width: 100%;
   padding: 0px;
   margin-right: auto;
