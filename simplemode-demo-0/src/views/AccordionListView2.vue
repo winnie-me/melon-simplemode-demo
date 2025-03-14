@@ -102,7 +102,7 @@
 import {useUserStore} from "@/stores/userStore";
 import AccordionListView from "@/views/AccordionListView.vue";
 import ExampleCardView2 from "@/views/ExampleCardView2.vue";
-import DetailTagView from "@/views/DetailTagView.vue";
+import DetailTagView from "@/components/DetailTagView.vue";
 import TrendRevivalListView from "@/views/TrendRevivalListView.vue";
 import SongListItem from "@/components/SongListItem.vue";
 

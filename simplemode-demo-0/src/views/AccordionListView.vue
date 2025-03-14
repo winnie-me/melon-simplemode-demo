@@ -260,7 +260,6 @@ export default {
   position: relative;
   transition: 0.3s min-height cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  justify-content: space-between;
 }
 
 ::v-deep(.v-expansion-panel-text__wrapper) {

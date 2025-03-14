@@ -1,22 +1,31 @@
 <template>
-  <v-list-item @click="playSong(song)" v-if="song.song_id">
-    <template v-slot:prepend>
-      <v-avatar rounded="lg" size="48">
-        <img
-          :src="`https://cdnimg.melon.co.kr/${song.img}/melon/resize/282/quality/80/optimize`"
-          class="avatar-img"
-        />
-      </v-avatar>
+
+  <v-tooltip :disabled="disableTooltip" class="custom-tooltip" location="bottom">
+    <template v-slot:activator="{ props }">
+      <v-list-item @click="playSong(song)" v-if="song.song_id" v-bind="props">
+        <template v-slot:prepend>
+          <v-avatar rounded="lg" size="48">
+            <img
+              :src="`https://cdnimg.melon.co.kr/${song.img}/melon/resize/282/quality/80/optimize`"
+              class="avatar-img"
+            />
+          </v-avatar>
+        </template>
+        <v-list-item-title>{{ decodeText(song.title) }}</v-list-item-title>
+        <v-list-item-subtitle>
+          {{ decodeText(song.artist_names.join(",")) }}
+        </v-list-item-subtitle>
+      </v-list-item>
     </template>
-    <v-list-item-title>{{ decodeText(song.title) }}</v-list-item-title>
-    <v-list-item-subtitle>
-      {{ decodeText(song.artist_names.join(",")) }}
-    </v-list-item-subtitle>
-  </v-list-item>
+    점수:
+    {{ song.const_score }}
+  </v-tooltip>
+
 </template>
 
 <script>
 import {useSelectedSongStore} from "@/stores/selectedSongStore.js";
+import {computed} from "vue";
 
 export default {
   props: {
@@ -24,17 +33,22 @@ export default {
       type: Object,
       required: true,
     },
+    disableTooltip: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
-  setup() {
+  setup(props) {
     const selectedSongStore = useSelectedSongStore();
     return {
       selectedSongStore,
     };
   },
+  computed: {},
   data() {
     return {
       domParser: new DOMParser(),
-      // selectedSongStore: useSelectedSongStore(),
     };
   },
   methods: {
@@ -43,11 +57,27 @@ export default {
       return doc.documentElement.textContent;
     },
     playSong(song) {
-      window.location.href = `melonplayer://play?ref=XXX&cid=${song.song_id}&ctype=song&menuid=1234`; // URL 실행
       event.stopPropagation()
-      // this.selectedSongStore.selectedSong = song
-      this.selectedSongStore.$patch({ selectedSong: song });
-    }
+
+      this.selectedSongStore.$patch({selectedSong: song});
+
+      switch (this.$getOS()) {
+        case "Android":
+        case "iOS":
+          window.location.href = `melonapp://play?cid=${song.song_id}&ctype=1&openplayer=N&releaseRepeat=N&excludeSongList=Y`
+          console.log("Android|iOS");
+          break;
+        case "macOS":
+          window.location.href = `melonplayer://play?ref=XXX&cid=${song.song_id}&ctype=song&menuid=1234`; // URL 실행
+          break;
+        // case "Windows":
+        //   console.log("목요일");
+        //   break;
+        default:
+          console.log("잘못된 입력");
+      }
+    },
+
   },
 };
 </script>
@@ -62,4 +92,11 @@ export default {
   height: 100%;
   object-fit: cover;
 }
+
+.custom-tooltip ::v-deep(.v-overlay__content) {
+  background-color: #dcedc8 !important; /* ✅ Light Green Lighten-5 색상 */
+  color: black !important; /* ✅ 텍스트 색상 변경 */
+  opacity: 0.9;
+}
+
 </style>

@@ -5,7 +5,11 @@
       <v-col cols="12">
 
         <SlotItem title="유저별 시드곡">
-          <a :href="'https://www.melon.com/mymusic/recent/mymusicrecentsong_list.htm?memberKey='+store.selectedUserId" target="_blank">최근들은</a>
+          <template #subtitle>
+            <a
+              :href="'https://www.melon.com/mymusic/recent/mymusicrecentsong_list.htm?memberKey='+store.selectedUserId"
+              target="_blank">최근들은</a>
+          </template>
           <UserSeedSongSlot/>
         </SlotItem>
 
@@ -15,7 +19,7 @@
     <v-row>
       <v-col cols="12">
         <SlotItem title="역주행곡">
-          <TrendRevivalSlot />
+          <TrendRevivalSlot/>
         </SlotItem>
       </v-col>
     </v-row> <!-- TagBasedSongExplorer -->
@@ -36,42 +40,28 @@ export default {
     UserSeedSongSlot,
     TrendRevivalSlot
   },
-/*  setup() {
-    const store = useUserStore();
-    return {
-      store,
-    };
-  },*/
   data() {
     return {
       store: useUserStore(),
-      // shouldShowArrows: false,
-      // store: useUserStore(),
-      // selectedUserId: null,
-      // selectedSong: null,
-      // selectedCardTitle: null,
-      // nextPageType: null,
     };
   },
   mounted() {
   },
   computed: {
-/*    computedSelectedUserId() {
-      return this.store.selectedUserId; // store의 selectedUserId를 computed로 반환
-    }*/
+    /*    computedSelectedUserId() {
+          return this.store.selectedUserId; // store의 selectedUserId를 computed로 반환
+        }*/
   },
   watch: {
-/*    computedSelectedUserId(newVal) {
-      if (newVal) {
-        this.selectedUserId = newVal; // 반응형 변수에 저장
-        // this.fetchInitialData();
-      }
-    }*/
+    /*    computedSelectedUserId(newVal) {
+          if (newVal) {
+            this.selectedUserId = newVal; // 반응형 변수에 저장
+            // this.fetchInitialData();
+          }
+        }*/
   },
 
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 
@@ -107,6 +97,22 @@ export default {
 }
 
 .song-item {
-  width: 320px;
+  width: 300px;
 }
+
+
+::v-deep(.v-card-title + .v-card-text) {
+  padding: 0;
+}
+
+
+/*::v-deep(.v-card)
+{
+  padding: 8px !important; !* 기본 padding을 강제로 덮어쓰기 *!
+}*/
+
+/*::v-deep(.v-list-item)
+{
+  padding: 4px !important; !* 기본 padding을 강제로 덮어쓰기 *!
+}*/
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <!--  <v-container>-->
   <v-slide-group>
     <v-slide-group-item v-for="(content, index) in contents" :key="index">
-      <v-card @click="navigateTo(content.title)">
+
+      <v-card @click="navigateTo(content.title)" style="padding: 0">
         <v-card-title class="white--text text-h6">
           {{ content.title }}
         </v-card-title>
@@ -12,28 +12,15 @@
               v-for="item in content.songs"
               :key="item.song_id"
               :song="item"
+              :disableTooltip="disableTooltip"
             />
           </v-list>
         </v-card-text>
       </v-card>
+
     </v-slide-group-item>
 
-
-<!--    <v-slide-group-item v-for="(card, index) in cards" :key="index">
-      <v-card class="image-card mx-2" elevation="4" @click="handleClick(card)">
-        <v-img
-          :src="card.src"
-          class="align-end"
-          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-          height="200px"
-          cover
-        >
-          <v-card-title class="text-white" v-text="card.title"></v-card-title>
-        </v-img>
-      </v-card>
-    </v-slide-group-item>-->
   </v-slide-group>
-  <!--  </v-container>-->
 </template>
 
 <script>
@@ -44,19 +31,17 @@ export default {
   data() {
     return {
       contents: [],
-      cards: [
-        {title: "2025-02", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "2025-01", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "2024-12", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-        {title: "2024-11", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "2024-10", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "2024-09", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-      ]
     };
   },
   // emits: ["clickCard"],
   mounted() {
     this.fetchInitialData();
+  },
+  computed: {
+    disableTooltip() {
+      const os = this.$getOS();
+      return os === "Android" || os === "iOS";
+    },
   },
   methods: {
     handleClick(card) {
@@ -94,4 +79,12 @@ export default {
   display: none !important;
 }
 
+.slot-card /*::v-deep()*/
+{
+  padding: 0 !important; /* 기본 padding을 강제로 덮어쓰기 */
+}
+
+.song-item {
+  width: 300px;
+}
 </style>

@@ -19,8 +19,29 @@ const vuetify = createVuetify({
   directives,  // Vuetify의 모든 디렉티브 등록
 });
 
-createApp(App)
-  .use(createPinia())
+const app = createApp(App)
+
+// ✅ getOS 함수 정의
+const getOS = () => {
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if (/android/i.test(userAgent)) {
+    return "Android";
+  } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    return "iOS";
+  } else if (/Macintosh|Mac OS X/.test(userAgent)) {
+    return "macOS";
+  } else if (/Windows NT/.test(userAgent)) {
+    return "Windows";
+  } else {
+    return "Unknown";
+  }
+};
+
+// ✅ Vue 전역 함수로 등록
+app.config.globalProperties.$getOS = getOS;
+
+app.use(createPinia())
   .use(router)
   .use(vuetify)
   .mount('#app');

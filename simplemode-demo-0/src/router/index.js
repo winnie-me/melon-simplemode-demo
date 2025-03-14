@@ -1,10 +1,8 @@
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 // import AccordionListView from "@/views/AccordionListView.vue";
 import ExampleCardView from "@/views/ExampleCardView.vue";
 import ListView from "@/views/ListView.vue";
 import AccordionListView2 from "@/views/AccordionListView2.vue";
-import AccordionListView3 from "@/views/AccordionListView3.vue";
 import TrendRevivalListView from "@/views/TrendRevivalListView.vue";
 import SimpleModeListView from "@/views/SimpleModeListView.vue";
 import TagBasedSongExplorer from "@/views/TagBasedSongExplorer.vue";
@@ -50,11 +48,11 @@ const router = createRouter({
           component: AccordionListView,
         },*/
 
-    {
+/*    {
       path: '/accordion-list-2',
       name: 'accordion-list-2',
       component: AccordionListView3,
-    },
+    },*/
   ],
 })
 
