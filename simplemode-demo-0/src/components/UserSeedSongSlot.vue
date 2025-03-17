@@ -3,115 +3,132 @@
 
     <v-slide-group-item v-if="songLists.length > 0 && songLists[0].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[0]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
 
     <v-slide-group-item v-if="songLists.length > 1 && songLists[1].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[1]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 2 && songLists[2].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[2]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 3 && songLists[3].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[3]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 4 && songLists[4].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[4]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 5 && songLists[5].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[5]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 6 && songLists[6].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[6]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 7 && songLists[7].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[7]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 8 && songLists[8].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[8]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 9 && songLists[9].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[9]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
     <v-slide-group-item v-if="songLists.length > 10 && songLists[10].length > 0">
       <v-list class="song-item">
-        <SongListItem
+        <SongItem
           v-for="item in songLists[10]"
           :key="item.song_id"
           :song="item"
+          :persistState="persistState"
         />
       </v-list>
     </v-slide-group-item>
   </v-slide-group>
 </template>
 <script>
-import SongListItem from "@/components/SongListItem.vue";
+import SongItem from "@/components/SongItem.vue";
 import {useUserStore} from "@/stores/userStore.js";
 
 export default {
   components: {
-    SongListItem
+    SongItem
   },
-  props: {},
+  props: {
+    persistState: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   setup() {
     const store = useUserStore();
     return {

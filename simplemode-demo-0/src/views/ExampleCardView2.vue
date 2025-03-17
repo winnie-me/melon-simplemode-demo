@@ -25,12 +25,12 @@ export default {
     return {
 
       cards: [
-        {title: "2025-02", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "2025-01", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "2024-12", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-        {title: "2024-11", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "2024-10", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "2024-09", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
+        {title: "비오는 날 듣기 좋은 카더가든 노래", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
+        {title: "드라이브할 때 듣기 좋은 브릿팝", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
+        {title: "김건모의 발라드", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
+        {title: "마이앤트메리 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
+        {title: "시부야케이 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
+        {title: "Bruno Mars 숨은 명곡", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
       ]
     };
   },
@@ -55,8 +55,8 @@ export default {
   overflow: hidden;
 }
 
-::v-deep(.v-slide-group__prev),
+/*::v-deep(.v-slide-group__prev),
 ::v-deep(.v-slide-group__next) {
   display: none !important;
-}
+}*/
 </style>

@@ -11,7 +11,9 @@ from contextlib import asynccontextmanager
 from feature.bigquery_api import router as bigquery_router
 from feature.firestore_api import router as firestore_router
 from feature.trending_revival import router as trending_revival_router
-from feature.collections import router as collections_router
+from feature.song_collections import router as song_collections_router
+from feature.artist_collections import router as artist_collections_router
+from feature.custom_collections import router as custom_collections_router
 
 # 환경 변수에서 프로젝트 ID 가져오기
 PROJECT_ID = os.getenv("GCP_PROJECT_ID", "dev-ai-project-357507")
@@ -56,7 +58,9 @@ app.add_middleware(
 app.include_router(bigquery_router, prefix="/bigquery", tags=["BigQuery"])
 app.include_router(firestore_router, prefix="/firestore", tags=["Firestore"])
 app.include_router(trending_revival_router, prefix="/trending-revival", tags=["chacha"])
-app.include_router(collections_router, prefix="/collections", tags=["julian"])
+app.include_router(song_collections_router, prefix="/collections", tags=["julian-song"])
+app.include_router(artist_collections_router, prefix="/artist-collections", tags=["julian-artist"])
+app.include_router(custom_collections_router, prefix="/custom-collections", tags=["julian-custom"])
 
 
 @app.get("/")

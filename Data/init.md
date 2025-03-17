@@ -105,3 +105,36 @@ FROM add_albub_info
 GROUP BY peak_month
 order by peak_month desc 
 ```
+
+
+
+----------------
+```sql
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,8 +22,45 @@
           <TrendRevivalSlot/>
         </SlotItem>
       </v-col>
-    </v-row> <!-- TagBasedSongExplorer -->
+    </v-row>
 
+    <v-row>
+      <v-col cols="12">
+        <SlotItem title="유저별 시드 테마">
+          <UserSeedCustomSlot/>
+        </SlotItem>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <SlotItem title="유저별 시드 아티스트">
+          <UserSeedArtistSlot/>
+        </SlotItem>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <SlotItem title="Listening Personality">
+          <ListeningPersonalitySlot/>
+        </SlotItem>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <SlotItem title="Seasonality">
+        </SlotItem>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <SlotItem title="유저별 팬덤 아티스트">
+        </SlotItem>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -33,12 +70,20 @@ import {useUserStore} from "@/stores/userStore";
 import SlotItem from "@/components/SlotItem.vue";
 import UserSeedSongSlot from "@/components/UserSeedSongSlot.vue";
 import TrendRevivalSlot from "@/components/TrendRevivalSlot.vue";
+import UserSeedCustomSlot from "@/components/UserSeedCustomSlot.vue";
+import ExampleCardView from "@/views/ExampleCardView.vue";
+import UserSeedArtistSlot from "@/components/UserSeedArtistSlot.vue";
+import ListeningPersonalitySlot from "@/components/ListeningPersonalitySlot.vue";
 
 export default {
   components: {
+    ListeningPersonalitySlot,
+    UserSeedArtistSlot,
+    UserSeedCustomSlot,
     SlotItem,
     UserSeedSongSlot,
-    TrendRevivalSlot
+    TrendRevivalSlot,
+    ExampleCardView
   },
   data() {
     return {

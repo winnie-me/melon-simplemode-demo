@@ -18,7 +18,7 @@
     <v-row>
       <v-col cols="12">
         <v-list>
-          <SongListItem
+          <SongItem
             v-for="item in songList"
             :key="item.song_id"
             :song="item"
@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import SongListItem from "@/components/SongListItem.vue";
+import SongItem from "@/components/SongItem.vue";
 import {useRoute} from "vue-router";
 
 export default {
-  components: {SongListItem},
+  components: {SongItem},
   setup() {
     const route = useRoute();
     return {

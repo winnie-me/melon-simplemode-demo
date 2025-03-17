@@ -20,6 +20,7 @@
         </v-list-item>
         <v-list-item link to="/simplemode-list">전체 기능 목록</v-list-item>
         <v-list-item link to="/tag-based-song-explorer">곡별 태그 탐색 기능</v-list-item>
+        <v-list-item link to="/">개인화 플리 확인</v-list-item>
       </v-list>
     </v-navigation-drawer>
 

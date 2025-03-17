@@ -6,6 +6,7 @@ import AccordionListView2 from "@/views/AccordionListView2.vue";
 import TrendRevivalListView from "@/views/TrendRevivalListView.vue";
 import SimpleModeListView from "@/views/SimpleModeListView.vue";
 import TagBasedSongExplorer from "@/views/TagBasedSongExplorer.vue";
+import CustomCollectionListView from "@/views/CustomCollectionListView.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -24,11 +25,16 @@ const router = createRouter({
       path: '/trend-revival-list',
       name: 'trend-revival-list',
       component: TrendRevivalListView,
-    }, // tag-based-song-explorer
+    },
     {
       path: '/tag-based-song-explorer',
       name: 'tag-based-song-explorer',
       component: TagBasedSongExplorer,
+    },
+    {
+      path: '/custom-collection-detail',
+      name: 'custom-collection-detail',
+      component: CustomCollectionListView,
     },
 
     {

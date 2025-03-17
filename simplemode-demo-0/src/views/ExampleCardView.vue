@@ -1,6 +1,5 @@
 <template>
-  <v-container>
-    <v-slide-group show-arrows>
+    <v-slide-group>
       <v-slide-group-item v-for="(card, index) in cards" :key="index">
         <v-card class="image-card mx-2" elevation="4" @click="navigateTo('/list-0',card)">
           <v-img
@@ -15,7 +14,6 @@
         </v-card>
       </v-slide-group-item>
     </v-slide-group>
-  </v-container>
 </template>
 
 <script>

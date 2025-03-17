@@ -2,7 +2,8 @@
 
   <v-tooltip :disabled="disableTooltip" class="custom-tooltip" location="bottom">
     <template v-slot:activator="{ props }">
-      <v-list-item @click="playSong(song)" v-if="song.song_id" v-bind="props">
+      <v-list-item @click="playSong(song);persistStateStore(song)" v-if="song.song_id"
+                   v-bind="props">
         <template v-slot:prepend>
           <v-avatar rounded="lg" size="48">
             <img
@@ -38,6 +39,11 @@ export default {
       required: false,
       default: true,
     },
+    persistState: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   setup(props) {
     const selectedSongStore = useSelectedSongStore();
@@ -59,7 +65,6 @@ export default {
     playSong(song) {
       event.stopPropagation()
 
-      this.selectedSongStore.$patch({selectedSong: song});
 
       switch (this.$getOS()) {
         case "Android":
@@ -77,15 +82,17 @@ export default {
           console.log("잘못된 입력");
       }
     },
-
+    persistStateStore(target) {
+      if (this.persistState) {
+        this.selectedSongStore.$patch({selectedSong: target});
+      }
+    }
   },
 };
 </script>
 
 <style scoped>
-.song-item {
-  width: 300px;
-}
+
 
 .avatar-img {
   width: 100%;

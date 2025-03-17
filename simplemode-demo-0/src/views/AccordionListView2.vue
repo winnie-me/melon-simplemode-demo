@@ -17,7 +17,7 @@
 
                   <v-slide-group-item>
                     <v-list class="song-item">
-                      <SongListItem
+                      <SongItem
                         v-for="item in song_list_1"
                         :key="item.song_id"
                         :song="item"
@@ -29,7 +29,7 @@
 
                   <v-slide-group-item>
                     <v-list class="song-item">
-                      <SongListItem
+                      <SongItem
                         v-for="item in song_list_2"
                         :key="item.song_id"
                         :song="item"
@@ -40,7 +40,7 @@
                   </v-slide-group-item>
                   <v-slide-group-item>
                     <v-list class="song-item">
-                      <SongListItem
+                      <SongItem
                         v-for="item in song_list_3"
                         :key="item.song_id"
                         :song="item"
@@ -51,7 +51,7 @@
                   </v-slide-group-item>
                   <v-slide-group-item>
                     <v-list class="song-item">
-                      <SongListItem
+                      <SongItem
                         v-for="item in song_list_4"
                         :key="item.song_id"
                         :song="item"
@@ -104,10 +104,10 @@ import AccordionListView from "@/views/AccordionListView.vue";
 import ExampleCardView2 from "@/views/ExampleCardView2.vue";
 import DetailTagView from "@/components/DetailTagView.vue";
 import TrendRevivalListView from "@/views/TrendRevivalListView.vue";
-import SongListItem from "@/components/SongListItem.vue";
+import SongItem from "@/components/SongItem.vue";
 
 export default {
-  components: {AccordionListView, ExampleCardView2, SongListItem, DetailTagView, TrendRevivalListView},
+  components: {AccordionListView, ExampleCardView2, SongItem, DetailTagView, TrendRevivalListView},
   setup() {
     const store = useUserStore();
 
@@ -219,10 +219,10 @@ export default {
   gap: 12px; !* 요소 간 간격 *!
 }*/
 
-::v-deep(.v-slide-group__prev),
+/*::v-deep(.v-slide-group__prev),
 ::v-deep(.v-slide-group__next) {
   display: none !important;
-}
+}*/
 
 .song-item {
   width: 300px;

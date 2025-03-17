@@ -1,42 +1,36 @@
 <template>
-  <v-slide-group>
-    <v-slide-group-item v-for="(content, index) in contents" :key="index">
+  <keep-alive>
+    <v-slide-group center-active>
 
-      <v-card @click="navigateTo(content.title)" style="padding: 0">
-        <v-card-title class="white--text text-h6">
-          {{ content.title }}
-        </v-card-title>
-        <v-card-text>
-          <v-list class="song-item">
-            <SongListItem
-              v-for="item in content.songs"
-              :key="item.song_id"
-              :song="item"
-              :disableTooltip="disableTooltip"
-            />
-          </v-list>
-        </v-card-text>
-      </v-card>
+      <v-slide-group-item v-for="(content, index) in contents" :key="index">
+        <SongListCard :content="content"
+                      :disable-tooltip="disableTooltip"
+                      :navigate-obj="{path: '/trend-revival-list', query: {tag: content.title}}"
+        />
+      </v-slide-group-item>
 
-    </v-slide-group-item>
-
-  </v-slide-group>
+    </v-slide-group>
+  </keep-alive>
 </template>
 
 <script>
-import SongListItem from "@/components/SongListItem.vue";
+import SongListCard from "@/components/SongListCard.vue";
 
 export default {
-  components: {SongListItem},
+  components: {SongListCard},
   data() {
     return {
       contents: [],
+      selected: null,
+
+      lastScrollTop: 0,
+      isScrollReset: false,
     };
   },
-  // emits: ["clickCard"],
   mounted() {
     this.fetchInitialData();
   },
+
   computed: {
     disableTooltip() {
       const os = this.$getOS();
@@ -44,13 +38,6 @@ export default {
     },
   },
   methods: {
-    handleClick(card) {
-      this.$emit("clickCard", card.title);
-    },
-    navigateTo(title) {
-      this.$router.push({path: '/trend-revival-list', query: {tag: title}});
-    },
-
     async fetchInitialData() {
       try {
         const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/trending-revival/list`);
@@ -74,17 +61,9 @@ export default {
   overflow: hidden;
 }
 
-::v-deep(.v-slide-group__prev),
-::v-deep(.v-slide-group__next) {
-  display: none !important;
-}
-
 .slot-card /*::v-deep()*/
 {
   padding: 0 !important; /* 기본 padding을 강제로 덮어쓰기 */
 }
 
-.song-item {
-  width: 300px;
-}
 </style>
