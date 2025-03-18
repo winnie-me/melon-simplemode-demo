@@ -38,8 +38,29 @@ const getOS = () => {
   }
 };
 
+/*const playSong = (song) => {
+  event.stopPropagation()
+
+  switch (this.$getOS()) {
+    case "Android":
+    case "iOS":
+      window.location.href = `melonapp://play?cid=${song.song_id}&ctype=1&openplayer=N&releaseRepeat=N&excludeSongList=Y`
+      console.log("Android|iOS");
+      break;
+    case "macOS":
+      window.location.href = `melonplayer://play?ref=XXX&cid=${song.song_id}&ctype=song&menuid=1234`; // URL 실행
+      break;
+    // case "Windows":
+    //   console.log("목요일");
+    //   break;
+    default:
+      console.log("잘못된 입력");
+  }
+}*/
+
 // ✅ Vue 전역 함수로 등록
 app.config.globalProperties.$getOS = getOS;
+// app.config.globalProperties.$playSong = playSong;
 
 app.use(createPinia())
   .use(router)

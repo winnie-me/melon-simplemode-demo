@@ -4,36 +4,20 @@
           @click="navigateTo('/list-0',card)"
           :style="{ border: `3px solid ${randomColor}` }"
   >
-<!--    <v-img
-      :src="randomImage"
-      class="align-end"
-      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-      height="110px"
-      cover
-    >-->
-      <v-card-title v-text="item.const_title"/> <!-- class="text-white"  -->
-<!--    </v-img>-->
+    <v-card-title v-text="item.const_title"/>
   </v-card>
 
 </template>
 
 <script>
-import {useSelectedSongStore} from "@/stores/selectedSongStore.js";
-import {computed} from "vue";
-
 export default {
   props: {
     item: {
       type: Object,
       required: true,
     },
-
   },
   setup(props) {
-    /*    const selectedSongStore = useSelectedSongStore();
-        return {
-          selectedSongStore,
-        };*/
   },
   computed: {},
   data() {
@@ -49,7 +33,7 @@ export default {
         "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
         "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       ],
-      randomImage: null,//this.imgList[Math.floor(Math.random() * this.imgList.length)],
+      randomImage: null,
       randomColor: null,
       colorList: [
         '#FFC1B4',
@@ -68,25 +52,11 @@ export default {
     this.randomImage = this.imgList[Math.floor(Math.random() * this.imgList.length)]
     this.randomColor = this.colorList[Math.floor(Math.random() * this.colorList.length)]
   },
-  methods: {
-    decodeText(html) {
-      const doc = this.domParser.parseFromString(html, "text/html");
-      return doc.documentElement.textContent;
-    },
-
-
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
-
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .custom-tooltip ::v-deep(.v-overlay__content) {
   background-color: #dcedc8 !important; /* ✅ Light Green Lighten-5 색상 */

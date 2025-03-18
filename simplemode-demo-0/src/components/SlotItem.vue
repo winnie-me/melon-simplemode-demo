@@ -1,6 +1,6 @@
 <template>
   <v-card :elevation="elevation">
-    <v-card-title class="white--text text-h6">
+    <v-card-title class="white--text text-h5">
       {{ title }}
     </v-card-title>
     <v-card-subtitle>

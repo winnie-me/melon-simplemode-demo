@@ -125,8 +125,6 @@
   </v-slide-group>
 </template>
 <script>
-
-// import SongItem from "@/components/SongItem.vue";
 import ArtistItem from "@/components/ArtistItem.vue";
 import {useUserStore} from "@/stores/userStore.js";
 
@@ -149,14 +147,6 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {title: "비오는 날 듣기 좋은 카더가든 노래", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "드라이브할 때 듣기 좋은 브릿팝", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "김건모의 발라드", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-        {title: "마이앤트메리 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "시부야케이 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "Bruno Mars 숨은 명곡", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-      ],
       artistLists: [], // ✅ 2차원 배열 저장
     };
   },
@@ -166,15 +156,13 @@ export default {
   computed: {},
   methods: {
     async fetchInitialData() {
-      console.log('UserSeedArtistSlot.vue')
       try {
         const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/artist-collections/user-profile-artists?user_id=${this.store.selectedUserId}`);
         const data = await response.json();
 
         this.splitArtists(data.data[0].artists)
-        // this.songs = data.data[0].songs;
-        console.log('this.artists', data.data[0].artists)
 
+        // console.log('this.artists', data.data[0].artists)
       } catch (error) {
         console.error('Error fetching data:', error);
         this.artistLists = [];
@@ -191,21 +179,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-/* 가로 스크롤 가능하도록 설정 */
-.v-slide-group {
-  white-space: nowrap;
-  overflow-x: auto;
-}
 
-/* 개별 컬럼 스타일 */
-.column-container {
-  min-width: 200px; /* 각 컬럼의 최소 너비 */
-}
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>

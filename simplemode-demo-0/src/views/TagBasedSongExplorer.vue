@@ -31,7 +31,7 @@
 
     <v-row>
       <v-col cols="12">
-        <SlotItem title="곡/아티스트별 태그별 관련곡 (위에서 선택해주세요)">
+        <SlotItem title="태그별 관련곡 (위에서 선택해주세요)" :elevation="0">
           <DetailTagView :selected-type="selectedTaret"/>
         </SlotItem>
       </v-col>
@@ -42,7 +42,6 @@
 
 
 <script>
-import {useUserStore} from "@/stores/userStore";
 import {useSelectedSongStore} from "@/stores/selectedSongStore.js";
 import SlotItem from "@/components/SlotItem.vue";
 import UserSeedSongSlot from "@/components/UserSeedSongSlot.vue";
@@ -61,7 +60,6 @@ export default {
   },
   data() {
     return {
-      // userStore: useUserStore(),
       selectedSongStore: useSelectedSongStore(),
       selectedArtistStore: useSelectedArtistStore(),
 
@@ -87,14 +85,10 @@ export default {
   watch: {
     "selectedTaret": {
       handler(newVal, oldVal) {
-        console.log("selectedTaret 변경:", newVal); //  ? newVal.title : newVal
+        // console.log("selectedTaret 변경:", newVal); //  ? newVal.title : newVal
 
         this.selectedSongStore.$patch({selectedSong: null});
         this.selectedArtistStore.$patch({selectedArtist: null})
-        // this.fetchKeywordList();
-        // this.keywordList = [];
-        // this.subSongList = [];
-        // this.selectedKeyword = ""
       },
     },
   },
@@ -104,19 +98,6 @@ export default {
 </script>
 
 <style scoped>
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.content-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 0px;
-}
 
 .content-container > * {
   flex-grow: 1; /* 내부 요소가 남은 공간을 전부 채움 */
@@ -124,18 +105,10 @@ export default {
   height: 100%;
 }
 
-/*.custom-slide-group {
-  display: flex;
-  gap: 12px; !* 요소 간 간격 *!
-}*/
-
-/*::v-deep(.v-slide-group__prev),
+::v-deep(.v-slide-group__prev),
 ::v-deep(.v-slide-group__next) {
   display: none !important;
-}*/
-
-.song-item {
-  width: 320px;
 }
+
 </style>
 

@@ -2,44 +2,16 @@
   <v-slide-group>
 
     <v-slide-group-item>
-      <div class="d-flex flex-column ma-1">
-        <h3 class="mx-2 mb-2">2월 15일</h3>
-        <ListeningPersonalityItem/>
-        <ListeningPersonalityItem :title="'국내'"/>
-        <ListeningPersonalityItem :title="'해외'"/>
-      </div>
+      <!--        <h3 class="mx-2 mb-2">2월 15일</h3>-->
+      <ListeningPersonalityItem :content="lp_all" v-if="lp_all"/>
     </v-slide-group-item>
+
     <v-slide-group-item>
-      <div class="d-flex flex-column ma-1">
-        <h3 class="mx-2 mb-2">2월 16일</h3>
-        <ListeningPersonalityItem/>
-        <ListeningPersonalityItem :title="'국내'"/>
-        <ListeningPersonalityItem :title="'해외'"/>
-      </div>
+      <ListeningPersonalityItem :title="'국내'" :content="lp_kpop" v-if="lp_kpop"/>
     </v-slide-group-item>
+
     <v-slide-group-item>
-      <div class="d-flex flex-column ma-1">
-        <h3 class="mx-2 mb-2">2월 17일</h3>
-        <ListeningPersonalityItem/>
-        <ListeningPersonalityItem :title="'국내'"/>
-        <ListeningPersonalityItem :title="'해외'"/>
-      </div>
-    </v-slide-group-item>
-    <v-slide-group-item>
-      <div class="d-flex flex-column ma-1">
-        <h3 class="mx-2 mb-2">2월 18일</h3>
-        <ListeningPersonalityItem/>
-        <ListeningPersonalityItem :title="'국내'"/>
-        <ListeningPersonalityItem :title="'해외'"/>
-      </div>
-    </v-slide-group-item>
-    <v-slide-group-item>
-      <div class="d-flex flex-column ma-1">
-        <h3 class="mx-2 mb-2">2월 19일</h3>
-        <ListeningPersonalityItem/>
-        <ListeningPersonalityItem :title="'국내'"/>
-        <ListeningPersonalityItem :title="'해외'"/>
-      </div>
+      <ListeningPersonalityItem :title="'해외'" :content="lp_pop" v-if="lp_pop"/>
     </v-slide-group-item>
 
   </v-slide-group>
@@ -67,44 +39,51 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {title: "비오는 날 듣기 좋은 카더가든 노래", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "드라이브할 때 듣기 좋은 브릿팝", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "김건모의 발라드", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-        {title: "마이앤트메리 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        {title: "시부야케이 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        {title: "Bruno Mars 숨은 명곡", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-      ],
-      artistLists: [], // ✅ 2차원 배열 저장
+      lp_all: null,
+      lp_pop: null, // CC0014
+      lp_kpop: null, // CC0006
     };
   },
   mounted() {
-    // this.fetchInitialData();
+    this.fetchInitialData();
   },
   computed: {},
   methods: {
     async fetchInitialData() {
       try {
-        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/artist-collections/user-profile-artists?user_id=${this.store.selectedUserId}`);
+        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/listening-personality/list?user_id=${this.store.selectedUserId}`);
         const data = await response.json();
 
-        this.splitArtists(data.data[0].artists)
-        // this.songs = data.data[0].songs;
-        console.log('this.artists', data.data[0].artists)
+        // 데이터 구조 확인 후 안전하게 접근
+        if (!data || !data.data || !data.data[0] || !data.data[0].contents) {
+          throw new Error("Invalid response structure: Missing contents");
+        }
+
+        // this.splitArtists(data.data[0].contents)
+        // 데이터가 존재하는 경우에만 값을 할당
+        this.lp_all = data.data[0].contents['all'] || null
+        this.lp_pop = data.data[0].contents['CC0014'] || null
+        this.lp_kpop = data.data[0].contents['CC0006'] || null
+
+
+        console.log('this.lp', data.data[0].contents['all'])
 
       } catch (error) {
         console.error('Error fetching data:', error);
-        this.artistLists = [];
+        // this.artistLists = [];
+        this.lp_all = null
+        this.lp_pop = null
+        this.lp_kpop = null
       }
     },
-    splitArtists(allArtists) { // 화면에 맞게 카드당 4곡씩 넣기
-      const chunkSize = 2; // ✅ 4개씩 분할
-      this.artistLists = [];
+    /*    splitArtists(allArtists) { // 화면에 맞게 카드당 4곡씩 넣기
+          const chunkSize = 2; // ✅ 4개씩 분할
+          this.artistLists = [];
 
-      for (let i = 0; i < allArtists.length; i += chunkSize) {
-        this.artistLists.push(allArtists.slice(i, i + chunkSize));
-      }
-    },
+          for (let i = 0; i < allArtists.length; i += chunkSize) {
+            this.artistLists.push(allArtists.slice(i, i + chunkSize));
+          }
+        },*/
   },
 };
 </script>

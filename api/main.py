@@ -14,6 +14,8 @@ from feature.trending_revival import router as trending_revival_router
 from feature.song_collections import router as song_collections_router
 from feature.artist_collections import router as artist_collections_router
 from feature.custom_collections import router as custom_collections_router
+from feature.listening_personality import router as listening_personality_router
+from feature.seasonality import router as seasonality_router
 
 # 환경 변수에서 프로젝트 ID 가져오기
 PROJECT_ID = os.getenv("GCP_PROJECT_ID", "dev-ai-project-357507")
@@ -61,6 +63,8 @@ app.include_router(trending_revival_router, prefix="/trending-revival", tags=["c
 app.include_router(song_collections_router, prefix="/collections", tags=["julian-song"])
 app.include_router(artist_collections_router, prefix="/artist-collections", tags=["julian-artist"])
 app.include_router(custom_collections_router, prefix="/custom-collections", tags=["julian-custom"])
+app.include_router(listening_personality_router, prefix="/listening-personality", tags=["listening-personality"])
+app.include_router(seasonality_router, prefix="/seasonality", tags=["seasonality_router"])
 
 
 @app.get("/")
@@ -87,3 +91,5 @@ def get_bigquery_data(request: Request):
         })
 
     return {"data": results}
+
+

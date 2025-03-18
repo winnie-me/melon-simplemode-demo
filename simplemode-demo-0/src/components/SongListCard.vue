@@ -1,8 +1,7 @@
 <template>
 
   <v-card :to="navigateObj" color="white"
-          @mouseover="tmpFunc"
-          :style="{ padding: '0px', width: cardWidth }">
+          :style="{ padding: '0px', width: cardWidth }" :elevation="0">
     <v-card-title class="white--text text-h6">
       {{ content.title }}
     </v-card-title>
@@ -35,40 +34,17 @@ export default {
       required: false,
       default: true,
     },
-    navigateTo: {
-      type: Function,
-      required: false,
-      default: () => {
-      },
-    },
     cardWidth: {
       type: String,
       required: false,
       default: '300px',
     },
-    tmpFunc: {
-      type: Function,
-      required: false,
-      default: () => {
-        console.log('tmpFunc')
-      },
-    },
     navigateObj: {
       type: Object,
       required: false,
-      default: {path: '/trend-revival-list', query: {tag: '2023-09'}}
+      default: {path: '/'} // , query: {tag: '2023-09'}
     }
   }
 }
 </script>
-<style scoped>
 
-/*::v-deep(.v-slide-group__prev),
-::v-deep(.v-slide-group__next) {
-  display: none !important;
-}*/
-
-.song-item {
-  width: 300px;
-}
-</style>

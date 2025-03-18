@@ -57,20 +57,6 @@ export default {
 };
 </script>
 
-<script setup>
-import {ref} from 'vue';
-
-// const items = ref(Array.from({length: 20}, (_, i) => `Item ${i + 1}`));
-
-/*const loadMore = async ({done}) => {
-  await new Promise(resolve => setTimeout(resolve, 1000)); // 1초 딜레이 (로딩 느낌)
-
-  const newItems = Array.from({length: 10}, (_, i) => `Item ${items.value.length + i + 1}`);
-  items.value.push(...newItems);
-
-  done(newItems.length > 0); // 데이터가 남아있다면 true, 없으면 false
-};*/
-</script>
 <style>
 .avatar-img {
   width: 100%;  /* 부모(v-avatar)의 너비를 100%로 설정 */

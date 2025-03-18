@@ -9,8 +9,6 @@
             :song="selectedSongStore.selectedSong"
             :persistState="true"
           />
-          <!--
-          -->
           <ArtistItem
             v-if="selectedArtistStore.selectedArtist && selectedType === 'UserSeedArtists'"
             :artist="selectedArtistStore.selectedArtist"
@@ -25,7 +23,8 @@
       <v-col cols="12">
         <v-slide-group class="px-2" v-model="selectedKeyword">
           <v-slide-group-item v-for="(tagInfo, tagIndex) in keywordList" :key="tagIndex"
-                              :value="tagInfo.title" v-if="selectedSongStore.selectedSong || selectedArtistStore.selectedArtist">
+                              :value="tagInfo.title"
+                              v-if="selectedSongStore.selectedSong || selectedArtistStore.selectedArtist">
             <v-btn class="mx-1"
                    density="compact" variant="tonal"
                    :color="selectedKeyword === tagInfo.title ? 'blue-accent-4' : 'green-darken-1'"
@@ -36,7 +35,6 @@
         </v-slide-group>
       </v-col>
     </v-row>
-
 
     <!--    서브곡 -->
     <v-row>
@@ -50,6 +48,7 @@
         </v-list>
       </v-col>
     </v-row>
+
   </v-container>
 </template>
 
@@ -67,22 +66,19 @@ export default {
     selectedType: {
       type: String,
       required: true,
-      // default: 'UserSeedSongs'
     }
   },
   data() {
     return {
-      // items: [],
       keywordList: [],
       subSongList: [],
       selectedSongStore: useSelectedSongStore(),
       selectedArtistStore: useSelectedArtistStore(),
-      selectedUserStore: useUserStore(), // selectedUserId
+      selectedUserStore: useUserStore(),
       selectedKeyword: "",
     };
   },
   watch: {
-
     "selectedSongStore.selectedSong": {
       handler(newVal, oldVal) {
         console.log("선택된 곡 변경:", newVal ? newVal.title : newVal);
@@ -126,17 +122,14 @@ export default {
   },
   methods: {
     async fetchKeywordList() {
-      console.log('fetchInitialData DetailTagView.vue', this.selectedType)
       if (!this.selectedSongStore.selectedSong && !this.selectedArtistStore.selectedArtist) return;
 
       try {
         const keywordListAPI = this.getKeywordListAPI();
-        console.log(typeof keywordListAPI)
         if (typeof keywordListAPI !== 'string') return
 
         const response = await fetch(keywordListAPI);
         const data = await response.json();
-        console.log('keys', data.data[0].keys)
 
         this.keywordList = data.data[0].keys
 
@@ -151,20 +144,16 @@ export default {
       } catch (error) {
         console.error('Error fetching data:', error);
         this.keywordList = [];
-
       }
     },
     async loadSubSongList(keyInfo) {
-      console.log('loadSubSongList', keyInfo)
       this.selectedKeyword = keyInfo.title
 
       try {
         const subSongListAPI = this.getSubSongListAPI(keyInfo);
-        console.log(typeof subSongListAPI)
 
         const response = await fetch(subSongListAPI)
         const data = await response.json();
-        console.log('loadSubSongList', data.data[0].songs)
         this.subSongList = data.data[0].songs
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -183,7 +172,6 @@ export default {
         default:
           return;
       }
-      console.log('getKeywordListAPI', url)
       return url
     },
     getSubSongListAPI(keyInfo) {
@@ -200,7 +188,6 @@ export default {
         default:
           return;
       }
-      console.log('getSubSongListAPI', url)
       return url
     },
   }
@@ -208,21 +195,6 @@ export default {
 </script>
 
 <style scoped>
-.clickable-item {
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.avatar-img {
-  width: 100%; /* 부모(v-avatar)의 너비를 100%로 설정 */
-  height: 100%; /* 부모(v-avatar)의 높이를 100%로 설정 */
-  object-fit: cover; /* 이미지가 꽉 차면서 비율을 유지하도록 설정 */
-}
-
-.list-container {
-  max-width: 1200px; /* 너무 넓어지는 것을 방지 */
-  margin: 0 auto; /* 중앙 정렬 */
-}
 
 ::v-deep(.v-col) {
   padding: 4px;

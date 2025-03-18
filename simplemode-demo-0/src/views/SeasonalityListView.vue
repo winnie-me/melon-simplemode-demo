@@ -53,7 +53,7 @@ export default {
   watch: {},
   mounted() {
     this.selectedTag = this.route.query.tag
-
+    console.log('title', this.selectedTag)
     this.fetchInitialData(this.route.query.tag);
     this.fetchTagData();
   },
@@ -63,7 +63,6 @@ export default {
         const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/trending-revival/detail?peak_month=${title ?? this.selectedTag}`); // 실제 API URL로 변경
         const data = await response.json();
         this.songList = data.data[0].songs
-
         // console.log('response', this.selectedTag, data.data[0].songs)
         this.selectedTag = title
       } catch (error) {
@@ -83,7 +82,9 @@ export default {
         this.tagList = [];
       }
     },
-
+    playSong(song_id) {
+      window.location.href = `melonplayer://play?ref=XXX&cid=${song_id}&ctype=song&menuid=1234`; // URL 실행
+    }
   }
 };
 </script>

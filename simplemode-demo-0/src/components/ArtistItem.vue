@@ -1,7 +1,8 @@
 <template>
 
   <v-card class="ma-1 d-flex flex-column align-center" elevation="0" style="width: 170px"
-          @click="persistStateStore(artist)">
+          @click="persistStateStore(artist)" :ripple="this.persistState"
+          :style="{ 'pointer-events': !persistState ? 'none' : 'auto' }">
     <v-avatar rounded="circle" size="115">
       <img
         :src="`https://cdnimg.melon.co.kr/${artist.img}/melon/resize/282/quality/80/optimize`"
@@ -29,11 +30,6 @@ export default {
       required: false,
       default: false,
     },
-    /*    disableTooltip: {
-          type: Boolean,
-          required: false,
-          default: true,
-        },*/
   },
   setup(props) {
     const selectedArtistStore = useSelectedArtistStore();
@@ -53,20 +49,15 @@ export default {
       return doc.documentElement.textContent;
     },
     persistStateStore(target) {
-      console.log('persistStateStore', this.persistState, target)
       if (this.persistState) {
         this.selectedArtistStore.$patch({selectedArtist: target});
       }
-      // this.$router.push({path: '/trend-revival-list', query: {tag: '2023-09'}});
     }
-
-
   },
 };
 </script>
 
 <style scoped>
-
 
 .avatar-img {
   width: 100%;

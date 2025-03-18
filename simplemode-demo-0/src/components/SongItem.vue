@@ -1,7 +1,8 @@
 <template>
 
-  <v-tooltip :disabled="disableTooltip" class="custom-tooltip" location="bottom">
+  <v-tooltip :disabled="true" class="custom-tooltip" location="bottom">
     <template v-slot:activator="{ props }">
+
       <v-list-item @click="playSong(song);persistStateStore(song)" v-if="song.song_id"
                    v-bind="props">
         <template v-slot:prepend>
@@ -17,6 +18,7 @@
           {{ decodeText(song.artist_names.join(",")) }}
         </v-list-item-subtitle>
       </v-list-item>
+
     </template>
     점수:
     {{ song.const_score }}
@@ -26,7 +28,6 @@
 
 <script>
 import {useSelectedSongStore} from "@/stores/selectedSongStore.js";
-import {computed} from "vue";
 
 export default {
   props: {
@@ -65,7 +66,6 @@ export default {
     playSong(song) {
       event.stopPropagation()
 
-
       switch (this.$getOS()) {
         case "Android":
         case "iOS":
@@ -92,7 +92,6 @@ export default {
 </script>
 
 <style scoped>
-
 
 .avatar-img {
   width: 100%;

@@ -20,12 +20,12 @@
         </v-list-item>
         <v-list-item link to="/simplemode-list">전체 기능 목록</v-list-item>
         <v-list-item link to="/tag-based-song-explorer">곡별 태그 탐색 기능</v-list-item>
-        <v-list-item link to="/">개인화 플리 확인</v-list-item>
+<!--        <v-list-item link to="/">개인화 플리 확인</v-list-item>-->
       </v-list>
     </v-navigation-drawer>
 
     <!-- 메인 컨텐츠 영역 -->
-    <v-main style="max-width: 100%; width: 100%;"> <!--  :style="{ marginLeft: drawerVisible ? '153px' : '0' }" -->
+    <v-main style="max-width: 100%; width: 100%;">
       <v-container :style="{ width: mainWidth }" class="content-container">
         <RouterView :key="store.selectedUserId"/>
       </v-container>
@@ -52,17 +52,8 @@ export default {
     mainWidth() {
       return "90vw";
     },
-    drawerVisible() {
-      return this.display.mdAndUp.value && this.drawer.value;
-    },
   },
   methods: {
-    toggleDrawer() {
-      this.drawer = !this.drawer;
-    },
-    selectItem(item) {
-      console.log(`${item} 선택됨`);
-    }
   }
 };
 </script>

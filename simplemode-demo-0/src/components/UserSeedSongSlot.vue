@@ -22,6 +22,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 2 && songLists[2].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -32,6 +33,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 3 && songLists[3].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -42,6 +44,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 4 && songLists[4].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -52,6 +55,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 5 && songLists[5].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -62,6 +66,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 6 && songLists[6].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -72,6 +77,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 7 && songLists[7].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -82,6 +88,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 8 && songLists[8].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -92,6 +99,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 9 && songLists[9].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -102,6 +110,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
     <v-slide-group-item v-if="songLists.length > 10 && songLists[10].length > 0">
       <v-list class="song-item">
         <SongItem
@@ -112,6 +121,7 @@
         />
       </v-list>
     </v-slide-group-item>
+
   </v-slide-group>
 </template>
 <script>
@@ -151,8 +161,8 @@ export default {
         const data = await response.json();
 
         this.splitSongs(data.data[0].songs)
-        // this.songs = data.data[0].songs;
-        console.log('this.songs', data.data[0].songs)
+
+        // console.log('this.songs', data.data[0].songs)
 
       } catch (error) {
         console.error('Error fetching data:', error);

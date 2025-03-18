@@ -99,3 +99,120 @@ select user_id,
 from by_user
 group by user_id
 ```
+
+```sql
+with _all as (
+  select *, 'all' as _type
+  from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2`
+  where h in (mod(46536104, 100),
+    mod(59040609, 100),
+    mod(37884321, 100),
+    mod(52894215, 100),
+    mod(59337842, 100)
+    
+  )
+  and user_id in (46536104, 59040609, 37884321, 52894215, 59337842)
+  and dt = (
+      select max(dt)
+      from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2`
+  )
+),
+lp_CC0006 as (
+  select *, 'CC0006' as _type
+  from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2_CC0006`
+  where h in (mod(46536104, 100),
+    mod(59040609, 100),
+    mod(37884321, 100),
+    mod(52894215, 100),
+    mod(59337842, 100)
+    
+  )
+  and user_id in (46536104, 59040609, 37884321, 52894215, 59337842)
+  and dt = (
+      select max(dt)
+      from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2_CC0006`
+  )
+),
+lp_CC0014 as (
+  select *, 'CC0014' as _type
+  from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2_CC0014`
+  where h in (mod(46536104, 100),
+    mod(59040609, 100),
+    mod(37884321, 100),
+    mod(52894215, 100),
+    mod(59337842, 100)
+    
+  )
+  and user_id in (46536104, 59040609, 37884321, 52894215, 59337842)
+  and dt = (
+      select max(dt)
+      from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2_CC0014`
+  )
+),
+_union as (
+    select * from _all
+    union all
+    select * from lp_CC0006
+    union all
+    select * from lp_CC0014
+)
+select user_id,
+       array_agg(struct(
+           _type,
+           tn_score,
+           tn_components,
+           cu_score,
+           cu_components,
+           lv_score,
+           fe_score
+       )) contents
+from _union
+group by user_id
+```
+
+
+```sql
+with s as (
+  select *, 'all' as _type
+  from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2`
+  where h in (mod(46536104, 100),
+    mod(59040609, 100),
+    mod(37884321, 100),
+    mod(52894215, 100),
+    mod(59337842, 100)
+    
+  )
+  and user_id in (46536104, 59040609, 37884321, 52894215, 59337842)
+  and dt = (
+      select max(dt)
+      from `dev-ai-project-357507.melon_user_analysis.listening_personality_v2`
+  )
+),
+_ordering as (
+    select s.*, 
+           tn.id as _tn_id, 
+           tn.value as _tn_value, 
+           tn.score as _tn_score, 
+           cn.id as _cn_id,
+           cn.value as _cn_value,
+           cn.score as _cn_score
+    from s, unnest(tn_components) tn, unnest(cu_components) cn
+),
+_agg as (
+
+    select user_id, _type, tn_score, cu_score, lv_score, fe_score,
+           array_agg(struct(
+               _tn_id as id,
+               _tn_value as value,
+               _tn_score as score
+           ) order by _tn_score desc) tn_components,
+           array_agg(struct(
+               _cn_id as id,
+               _cn_value as value,
+               _cn_score as score
+           ) order by _cn_score desc) cn_components
+    from _ordering
+    group by user_id, _type, tn_score, cu_score, lv_score, fe_score
+)
+select * from _agg
+```

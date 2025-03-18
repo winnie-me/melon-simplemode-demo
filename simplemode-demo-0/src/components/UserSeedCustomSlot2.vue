@@ -1,5 +1,5 @@
 <template>
-
+<!-- 글자만 있는 카드 col 당 2개씩 노출하는 레이아웃 -->
   <v-slide-group>
 
     <v-slide-group-item v-if="itemLists.length > 0 && itemLists[0].length > 0">
@@ -138,11 +138,6 @@ export default {
       cards: [
         {id: 0, title: "비오는 날 듣기 좋은 카더가든 노래", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
         {id: 1, title: "드라이브할 때 듣기 좋은 브릿팝", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        // {title: "김건모의 발라드", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
-
-        // {title: "마이앤트메리 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/house.jpg"},
-        // {title: "시부야케이 대표곡", src: "https://cdn.vuetifyjs.com/images/cards/road.jpg"},
-        // {title: "Bruno Mars 숨은 명곡", src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg"},
       ],
 
       itemLists: [], // ✅ 2차원 배열 저장
@@ -152,16 +147,7 @@ export default {
     this.fetchInitialData();
   },
   computed: {
-/*    cardColumns() {
-      let columns = [];
-      for (let i = 0; i < this.cards.length; i += 2) {
-        columns.push(this.cards.slice(i, i + 2));
-      }
-      return columns;
-    },
-    drawerVisible() {
-      return this.display.mdAndUp.value && this.drawer.value;
-    },*/
+
   },
   methods: {
     async fetchInitialData() {
@@ -170,8 +156,8 @@ export default {
         const data = await response.json();
 
         this.splitSongs(data.data[0].customs)
-        // this.songs = data.data[0].songs;
-        console.log('this.customs', data.data[0].customs)
+
+        // console.log('this.customs', data.data[0].customs)
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -189,19 +175,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-.image-card {
-  width: 300px;
-  height: 200px;
-  border-radius: 10px;
-  overflow: hidden;
-}
 
-/*.custom-playlist-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}*/
-
-
-</style>
