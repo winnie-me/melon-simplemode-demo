@@ -16,6 +16,7 @@ from feature.artist_collections import router as artist_collections_router
 from feature.custom_collections import router as custom_collections_router
 from feature.listening_personality import router as listening_personality_router
 from feature.seasonality import router as seasonality_router
+from feature.user_history import router as user_history_router
 
 # 환경 변수에서 프로젝트 ID 가져오기
 PROJECT_ID = os.getenv("GCP_PROJECT_ID", "dev-ai-project-357507")
@@ -65,6 +66,7 @@ app.include_router(artist_collections_router, prefix="/artist-collections", tags
 app.include_router(custom_collections_router, prefix="/custom-collections", tags=["julian-custom"])
 app.include_router(listening_personality_router, prefix="/listening-personality", tags=["listening-personality"])
 app.include_router(seasonality_router, prefix="/seasonality", tags=["seasonality_router"])
+app.include_router(user_history_router, prefix="/user-history", tags=["user_history_router"])
 
 
 @app.get("/")

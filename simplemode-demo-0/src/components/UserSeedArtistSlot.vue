@@ -126,7 +126,7 @@
 </template>
 <script>
 import ArtistItem from "@/components/ArtistItem.vue";
-import {useUserStore} from "@/stores/userStore.js";
+import {useUserStore} from "@/stores/selectedUserStore.js";
 
 export default {
   components: {
@@ -140,9 +140,9 @@ export default {
     },
   },
   setup() {
-    const store = useUserStore();
+    const userStore = useUserStore();
     return {
-      store,
+      store: userStore,
     };
   },
   data() {
@@ -157,7 +157,7 @@ export default {
   methods: {
     async fetchInitialData() {
       try {
-        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/artist-collections/user-profile-artists?user_id=${this.store.selectedUserId}`);
+        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/artist-collections/user-profile-artists?user_id=${this.store.userId}&dt=${this.store.dt}`);
         const data = await response.json();
 
         this.splitArtists(data.data[0].artists)

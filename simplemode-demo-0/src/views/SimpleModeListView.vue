@@ -4,7 +4,7 @@
     <v-row>
       <v-col cols="12">
         <SlotItem title="유저별 시드 테마" :elevation="0">
-          <UserSeedCustomSlot/>
+<!--          <UserSeedCustomSlot/>-->
         </SlotItem>
       </v-col>
     </v-row>
@@ -14,9 +14,9 @@
         <SlotItem title="유저별 시드곡" :elevation="0">
           <template #subtitle>
             <a target="_blank"
-               :href="'https://www.melon.com/mymusic/recent/mymusicrecentsong_list.htm?memberKey='+store.selectedUserId">최근들은</a>
+               :href="'https://www.melon.com/mymusic/recent/mymusicrecentsong_list.htm?memberKey='+store.userId">최근들은</a>
           </template>
-          <UserSeedSongSlot/>
+<!--          <UserSeedSongSlot/>-->
         </SlotItem>
       </v-col>
     </v-row>
@@ -24,7 +24,7 @@
     <v-row>
       <v-col cols="12">
         <SlotItem title="유저별 시드 아티스트" :elevation="0">
-          <UserSeedArtistSlot/>
+          <UserSeedArtistSlot :key="store.userId"/>
         </SlotItem>
       </v-col>
     </v-row>
@@ -65,7 +65,7 @@
 
 
 <script>
-import {useUserStore} from "@/stores/userStore";
+import {useUserStore} from "@/stores/selectedUserStore";
 import SlotItem from "@/components/SlotItem.vue";
 import UserSeedSongSlot from "@/components/UserSeedSongSlot.vue";
 import TrendRevivalSlot from "@/components/TrendRevivalSlot.vue";
