@@ -64,6 +64,8 @@ export default {
       return doc.documentElement.textContent;
     },
     playSong(song) {
+      if (this.persistState) return
+      
       event.stopPropagation()
 
       switch (this.$getOS()) {

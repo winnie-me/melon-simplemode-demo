@@ -7,12 +7,14 @@
           <SongItem
             v-if="selectedSongStore.selectedSong && selectedType === 'UserSeedSongs'"
             :song="selectedSongStore.selectedSong"
-            :persistState="true"
           />
+<!--
+            :persistState="true"
+            :persistState="true"
+-->
           <ArtistItem
             v-if="selectedArtistStore.selectedArtist && selectedType === 'UserSeedArtists'"
             :artist="selectedArtistStore.selectedArtist"
-            :persistState="true"
           />
         </v-list>
       </v-col>
