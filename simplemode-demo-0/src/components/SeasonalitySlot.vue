@@ -5,7 +5,7 @@
       <v-slide-group-item v-for="(content, index) in contents" :key="index">
         <SongListCard :content="content"
                       :disable-tooltip="disableTooltip"
-                      :navigate-obj="{path: '/seasonality', query: {title: content.title}}"
+                      :navigate-obj="{path: '/seasonality', query: {tag: content.title}}"
         />
       </v-slide-group-item>
 
@@ -40,7 +40,7 @@ export default {
   methods: {
     async fetchInitialData() {
       try {
-        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/seasonality/list`); //
+        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/seasonality/played-list`)
         const data = await response.json();
         this.contents = data.data[0].contents;
         // console.log('this.contents', data.data[0].contents)

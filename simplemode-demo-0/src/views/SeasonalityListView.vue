@@ -54,13 +54,14 @@ export default {
   mounted() {
     this.selectedTag = this.route.query.tag
     console.log('title', this.selectedTag)
+
     this.fetchInitialData(this.route.query.tag);
     this.fetchTagData();
   },
   methods: {
     async fetchInitialData(title) {
       try {
-        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/trending-revival/detail?peak_month=${title ?? this.selectedTag}`); // 실제 API URL로 변경
+        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/seasonality/played-detail?seasonality=${title ?? this.selectedTag}`)
         const data = await response.json();
         this.songList = data.data[0].songs
         // console.log('response', this.selectedTag, data.data[0].songs)
@@ -72,7 +73,7 @@ export default {
     },
     async fetchTagData() {
       try {
-        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/trending-revival/list`);
+        const response = await fetch(`https://winnie-bigquery-api-77vot6b6va-du.a.run.app/seasonality/played-list`);
         const data = await response.json();
         this.tagList = data.data[0].contents.map(item => item.title)
 
@@ -82,9 +83,7 @@ export default {
         this.tagList = [];
       }
     },
-    playSong(song_id) {
-      window.location.href = `melonplayer://play?ref=XXX&cid=${song_id}&ctype=song&menuid=1234`; // URL 실행
-    }
+
   }
 };
 </script>

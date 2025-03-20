@@ -3,6 +3,8 @@ import TrendRevivalListView from "@/views/TrendRevivalListView.vue";
 import SimpleModeListView from "@/views/SimpleModeListView.vue";
 import TagBasedSongExplorer from "@/views/TagBasedSongExplorer.vue";
 import CustomCollectionListView from "@/views/CustomCollectionListView.vue";
+import SeasonalityListView from "@/views/SeasonalityListView.vue";
+// import {useUserStore} from "@/stores/selectedUserStore.js";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -32,8 +34,24 @@ const router = createRouter({
       name: 'custom-collection-detail',
       component: CustomCollectionListView,
     },
+    {
+      path: '/seasonality',
+      name: 'seasonality',
+      component: SeasonalityListView,
+    },
 
   ],
 })
+
+// 🔹 모든 라우트 이동 전에 `fetchUserData()` 실행
+/*router.beforeEach(async (to, from, next) => {
+  const userStore = useUserStore();
+
+  if (!userStore.userId) {
+    await userStore.fetchUserData();
+  }
+
+  next();
+});*/
 
 export default router

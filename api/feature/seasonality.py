@@ -8,9 +8,29 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.get("/list")  # chacha
-def lists(request: Request):
-    ref = request.app.state.fs_client.collection("seasonality_list") \
+# @router.get("/audio-list")  # chacha
+# def audio_lists(request: Request):
+#     ref = request.app.state.fs_client.collection("seasonality_list") \
+#         .stream()
+#
+#     docs_list = list(ref)
+#
+#     results = []
+#     for doc in docs_list:
+#         doc_dict = doc.to_dict()
+#
+#         for content in doc_dict.get('contents'):
+#             content['title'] = content.get('pred')
+#
+#         results.append({
+#             'contents': doc_dict.get('contents')
+#         })
+#
+#     return {"data": results}
+
+@router.get("/played-list")  # chacha
+def played_lists(request: Request):
+    ref = request.app.state.fs_client.collection("played_seasonality_list") \
         .stream()
 
     docs_list = list(ref)
@@ -20,7 +40,7 @@ def lists(request: Request):
         doc_dict = doc.to_dict()
 
         for content in doc_dict.get('contents'):
-            content['title'] = content.get('pred')
+            content['title'] = content.get('seasonality')
 
         results.append({
             'contents': doc_dict.get('contents')
@@ -29,15 +49,15 @@ def lists(request: Request):
     return {"data": results}
 
 
-@router.get("/detail")
-def details(request: Request):
-    pred = request.query_params.get("pred")
+@router.get("/played-detail")
+def played_details(request: Request):
+    seasonality = request.query_params.get("seasonality")
 
-    if not pred:
-        return {"error": "Missing required query parameter: pred"}
+    if not seasonality:
+        return {"error": "Missing required query parameter: seasonality"}
 
-    ref = request.app.state.fs_client.collection("seasonality") \
-        .where("pred", "==", pred) \
+    ref = request.app.state.fs_client.collection("played_seasonality") \
+        .where("seasonality", "==", seasonality) \
         .stream()
 
     docs_list = list(ref)
@@ -48,8 +68,32 @@ def details(request: Request):
         content_mapping = {}
 
         results.append({
-            'pred': doc_dict.get('pred'),
+            'seasonality': doc_dict.get('seasonality'),
             'songs': doc_dict.get('songs')
         })
 
     return {"data": results}
+
+# @router.get("/audio-detail")
+# def audio_details(request: Request):
+#     pred = request.query_params.get("pred")
+#
+#     if not pred:
+#         return {"error": "Missing required query parameter: pred"}
+#
+#     ref = request.app.state.fs_client.collection("seasonality") \
+#         .where("pred", "==", pred) \
+#         .stream()
+#
+#     docs_list = list(ref)
+#
+#     results = []
+#     for doc in docs_list:
+#         doc_dict = doc.to_dict()
+#
+#         results.append({
+#             'pred': doc_dict.get('pred'),
+#             'songs': doc_dict.get('songs')
+#         })
+#
+#     return {"data": results}
