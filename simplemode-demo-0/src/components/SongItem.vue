@@ -65,7 +65,7 @@ export default {
     },
     playSong(song) {
       if (this.persistState) return
-      
+
       event.stopPropagation()
 
       switch (this.$getOS()) {

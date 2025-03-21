@@ -19,7 +19,7 @@
           />
         </v-list-item>
         <v-list-item link to="/simplemode-list">전체 기능 목록</v-list-item>
-        <v-list-item link to="/tag-based-song-explorer">곡별 태그 탐색 기능</v-list-item>
+        <v-list-item link to="/tag-based-song-explorer">태그 탐색 기능</v-list-item>
 <!--        <v-list-item link to="/">개인화 플리 확인</v-list-item>-->
       </v-list>
     </v-navigation-drawer>
@@ -43,7 +43,7 @@ export default {
       store: useUserStore(),
       display: useDisplay(),
       drawer: true,
-      userIds: ['46536104', '59040609', '37884321', '52894215', '59337842'],
+      userIds: ['46536104', '59040609', '37884321', '52894215', '59337842', '28350538'],
     };
   },
   mounted() {

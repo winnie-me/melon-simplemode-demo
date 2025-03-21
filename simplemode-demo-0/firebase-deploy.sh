@@ -1,6 +1,6 @@
 #gcloud auth login
-#gcloud auth application-default login
-#firebase login --reauth
+gcloud auth application-default login
+firebase login --reauth
 
 npm run build
 

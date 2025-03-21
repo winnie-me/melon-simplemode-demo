@@ -53,12 +53,14 @@ def custom_key_collection(request: Request):
     results = []
     for doc in docs_list:
         doc_dict = doc.to_dict()
+        songs = sorted(doc_dict.get('songs', []), key=lambda song: song.get('_order', float('inf')))
+
         results.append({
             'id': doc_dict.get('id'),
             'theme': doc_dict.get('theme'),
             'style': doc_dict.get('style'),
             'title': doc_dict.get('title'),
-            'songs': doc_dict.get('songs')
+            'songs': songs #doc_dict.get('songs')
         })
 
     return {"data": results}
@@ -84,6 +86,11 @@ def lists(request: Request):
     results = []
     for doc in docs_list:
         doc_dict = doc.to_dict()
+
+        for custom in doc_dict.get('customs'):
+            songs = sorted(custom.get('songs', []), key=lambda song: song.get('_order', float('inf')))
+            custom['songs'] = songs
+
         results.append({
             'user_id': doc_dict.get('user_id'),
             'customs': doc_dict.get('customs')
