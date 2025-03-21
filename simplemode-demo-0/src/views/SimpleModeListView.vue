@@ -4,7 +4,7 @@
     <v-row>
       <v-col cols="12">
         <SlotItem title="유저별 시드 테마" :elevation="0">
-          <UserSeedCustomSlot/>
+          <UserSeedCustomSlot :key="store.selectedUserId"/>
         </SlotItem>
       </v-col>
     </v-row>
@@ -16,7 +16,7 @@
             <a target="_blank"
                :href="'https://www.melon.com/mymusic/recent/mymusicrecentsong_list.htm?memberKey='+store.selectedUserId">최근들은</a>
           </template>
-          <UserSeedSongSlot/>
+          <UserSeedSongSlot :key="store.selectedUserId"/>
         </SlotItem>
       </v-col>
     </v-row>
@@ -24,7 +24,7 @@
     <v-row>
       <v-col cols="12">
         <SlotItem title="유저별 시드 아티스트" :elevation="0">
-          <UserSeedArtistSlot/>
+          <UserSeedArtistSlot :key="store.selectedUserId"/>
         </SlotItem>
       </v-col>
     </v-row>

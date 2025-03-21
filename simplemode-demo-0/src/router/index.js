@@ -4,7 +4,7 @@ import SimpleModeListView from "@/views/SimpleModeListView.vue";
 import TagBasedSongExplorer from "@/views/TagBasedSongExplorer.vue";
 import CustomCollectionListView from "@/views/CustomCollectionListView.vue";
 import SeasonalityListView from "@/views/SeasonalityListView.vue";
-// import {useUserStore} from "@/stores/selectedUserStore.js";
+import {useUserStore} from "@/stores/userStore.js";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -44,14 +44,14 @@ const router = createRouter({
 })
 
 // 🔹 모든 라우트 이동 전에 `fetchUserData()` 실행
-/*router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
 
-  if (!userStore.userId) {
+  if (!userStore.selectedUserId) {
     await userStore.fetchUserData();
   }
 
   next();
-});*/
+});
 
 export default router
